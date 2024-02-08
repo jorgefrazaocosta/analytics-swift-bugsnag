@@ -70,7 +70,7 @@ public class BugsnagDestination: DestinationPlugin {
             }            
         } else {
             Bugsnag.setUser(event.userId ?? event.anonymousId ?? nil, withEmail: nil, andName: nil)
-            Bugsnag.notifyError(NSError(domain: "Email & Name not found!", code: 404))
+            // Bugsnag.notifyError(NSError(domain: "Email & Name not found!", code: 404))
         }
         
         return event

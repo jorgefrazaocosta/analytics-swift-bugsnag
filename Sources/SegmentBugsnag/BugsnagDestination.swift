@@ -48,12 +48,14 @@ public class BugsnagDestination: DestinationPlugin {
         guard type == .initial else { return }
         
         guard let bugsnagSettings: BugsnagSettings = settings.integrationSettings(forPlugin: self) else { return }
-                        
-        //Bugsnag initialized with apikey
-        Bugsnag.start(withApiKey: bugsnagSettings.apiKey)
+        
+        let config = BugsnagConfiguration.loadConfig()
+        config.enabledErrorTypes.appHangs = false
+        config.apiKey = bugsnagSettings.apiKey
+
+        Bugsnag.start(with: config)
         
     }
-
     
     public func identify(event: IdentifyEvent) -> IdentifyEvent? {
         
